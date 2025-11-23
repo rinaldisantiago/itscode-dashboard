@@ -1,6 +1,5 @@
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import Paginado from './components/Paginador/Paginador';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Error from './components/Error/Error';
@@ -12,7 +11,6 @@ function App() {
     <BrowserRouter>
       <div className='App'>
         <NavBar></NavBar>
-        <Paginado></Paginado>
       </div>
       <Routes>
         <Route exact path="/" element= {<Home/>} />
