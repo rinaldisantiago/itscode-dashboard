@@ -1,5 +1,4 @@
-import React, { use } from "react";
-import Paginado from './components/Paginador/Paginador';
+import React, { useState, useEffect } from "react";
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 
@@ -25,15 +24,6 @@ function Users() {
         }
     }
 
-    return (
-        <>
-            <Button text="Anterior" callback={anterior}/>
-            <Label text={pageNumber}/>
-            <Button text="Siguiente" callback={siguiente}/>
-        </>
-    )
-
-
     const find = (evt) => {
         const {value} = evt.target;
         setQuery(value);
@@ -41,7 +31,7 @@ function Users() {
 
     const fetchData = async () => {
         try {
-            let response = await fetch(`'http://localhost:5052/User/${pageNumber}/5'`);
+            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/1?query=${query}`);
             let json = await response.json();
 
             setUsers(json.users);
@@ -52,15 +42,39 @@ function Users() {
         }
     }
 
-
     useEffect(() => {
         fetchData();
     }, [pageNumber, query]);
 
-
     return (
         <div>
+            <input type="text" value={query} onChange={find} />
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {
+                            users.map((user) => {
+                                return (
+                                    <tr>
+                                        <th scope="row">{user.id}</th>
+                                        <td>{user.userName}</td>
+                                        <td>Editar</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                </tbody>
+            </table>
             USERS
+            <Button text="Anterior" callback={anterior}/>
+            <Label text={pageNumber}/>
+            <Button text="Siguiente" callback={siguiente}/>
         </div>
     )
 }
