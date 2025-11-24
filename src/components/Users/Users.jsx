@@ -23,7 +23,6 @@ function Users() {
             setPageNumber(numero);
         }
     }
-    
     const find = (evt) => {
         const {value} = evt.target;
         setQuery(value);
@@ -41,7 +40,6 @@ function Users() {
             
         }
     }
-
 
     useEffect(() => {
         fetchData();
@@ -68,6 +66,9 @@ function Users() {
                                     <td>{user.fullName}</td>
                                     <td>{user.userName}</td>
                                     <td>EDITAR</td>
+                                    <td>ELIMINAR</td>
+                                    <td>BANEAR</td>
+
                                 </tr>
                             )
                         })

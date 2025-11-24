@@ -1,0 +1,9 @@
+.nav-text {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.nav-text::before {
+  content: '👤 ';
+}
