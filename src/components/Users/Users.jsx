@@ -30,7 +30,7 @@ function Users() {
 
     const fetchData = async () => {
         try {
-            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/1?query=${query}`);
+            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/16?query=${query}`);
             let json = await response.json();
 
             setUsers(json.users);

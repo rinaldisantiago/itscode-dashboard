@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { AuthService } from '../../services/AuthService';
 import { Form, Button, Alert, Container, Card } from 'react-bootstrap';
 import './Login.css';
+
+
+
 
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,24 +18,38 @@ const Login = () => {
     setError('');
     setLoading(true);
 
+    if (!userName.trim() || !password.trim()) {
+      setError('Usuario y contraseña son obligatorios');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Validación de campos
-      if (!userName.trim() || !password.trim()) {
-        setError('Usuario y contraseña son obligatorios');
-        setLoading(false);
-        return;
+
+      const apiResponse = await fetch(`http://localhost:5052/Session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userName: userName,
+          password: password,
+          isLoginDashboard: true,
+        }),
+      });
+
+      if (!apiResponse.ok) {
+        const errorData = await apiResponse.json();
+        throw new Error(errorData.message || 'Error en el login');
       }
 
-      // Llamar al servicio de autenticación
-      const response = await AuthService.login(userName, password);
+      const data = await apiResponse.json();
 
-      if (response.user) {
-        // Guardar usuario en el contexto junto con su ID
-        login(response.user, response.user.id);
+      // Guardar directamente en localStorage
+      localStorage.setItem('user', JSON.stringify(data.user));
 
-        // Redirigir al dashboard/admin
-        navigate('/admin');
-      }
+      // Redirigir al dashboard/admin
+      navigate('/users');
     } catch (err) {
       setError(err.message || 'Error al iniciar sesión. Por favor, intenta nuevamente.');
     } finally {
