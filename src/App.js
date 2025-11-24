@@ -6,6 +6,7 @@ import Error from './components/Error/Error';
 import Users from './components/Users/Users';
 import Admin from './components/Admin/Admin';
 import Login from './components/Login/Login';
+import Bienvinida from './components/Bienvenida/bienvenida';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 
@@ -17,7 +18,8 @@ function App() {
           <NavBar></NavBar>
         </div>
         <Routes>
-          <Route exact path="/" element= {<Login/>} />
+          <Route exact path="/" element= {<Bienvinida/>} />
+          <Route exact path="/login" element= {<Login/>} />
           <Route exact path="/home" element= {<PrivateRoute><Home/></PrivateRoute>} />
           <Route exact path="/users" element= {<PrivateRoute><Users/></PrivateRoute>}/>
           <Route exact path="/admin" element= {<PrivateRoute><Admin/></PrivateRoute>}/>
