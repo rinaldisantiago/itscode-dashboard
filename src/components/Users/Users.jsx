@@ -23,7 +23,6 @@ function Users() {
             setPageNumber(numero);
         }
     }
-    
     const find = (evt) => {
         const {value} = evt.target;
         setQuery(value);
@@ -41,7 +40,6 @@ function Users() {
             
         }
     }
-
 
     useEffect(() => {
         fetchData();
