@@ -42,7 +42,7 @@ function NavBar() {
                 </Button>
               </>
             ) : (
-              <Nav.Link><Link to={"/login"}>Iniciar Sesión</Link></Nav.Link>
+              <Nav.Link><Link to={"/login"}></Link></Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
