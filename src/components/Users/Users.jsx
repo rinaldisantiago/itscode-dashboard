@@ -42,6 +42,41 @@ function Users() {
         }
     }
 
+    const deleteUser = async (userId) => {
+        try {
+            const userLogged = JSON.parse(localStorage.getItem('user'));
+            const userLoggedId = userLogged?.id;
+            
+            let response = await fetch(`http://localhost:5052/User/${userId}/${userLoggedId}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                alert("Usuario eliminado exitosamente");
+                fetchData();
+            } else {
+                alert("Error al eliminar el usuario");
+            }
+        } catch (error) {
+            alert("Error al eliminar el usuario");
+        }
+    }
+
+    const banUser = async (userId) => {
+        try {
+            let response = await fetch(`http://localhost:5052/User/${userId}/ban`, {
+                method: 'POST'
+            });
+            if (response.ok) {
+                alert("Usuario baneado exitosamente");
+                fetchData();
+            } else {
+                alert("Error al banear el usuario");
+            }
+        } catch (error) {
+            alert("Error al banear el usuario");
+        }
+    }
+
     useEffect(() => {
         fetchData();
     }, [pageNumber, query]);
@@ -69,9 +104,15 @@ function Users() {
                                     <td>{user.fullName}</td>
                                     <td>{user.userName}</td>
                                     <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                    <td>EDITAR</td>
-                                    <td>ELIMINAR</td>
-                                    <td>BANEAR</td>
+                                    <td>
+                                        <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
+
+                                    </td>
+                                    <td>
+                                        <a href="/ban">
+                                            <Button text="BANEAR"/>
+                                        </a>
+                                    </td>
 
                                 </tr>
                             )
