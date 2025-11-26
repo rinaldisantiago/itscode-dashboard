@@ -5,18 +5,19 @@ export class Table extends PureComponent {
   render() {
     return (
       <div>
-        <table class= "table">
-                <thead className="thead-dark">
+        <table class="table">
+                <thead class="thead-dark">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre Completo</th>
                         <th scope="col">Nombre de Usuario</th>
                         <th scope="col">Estado</th>
-                        <th scope="col" colSpan="2">Acciones</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 {this.props.children}
-        </table>
+
+            </table>
       </div>
     )
   }

@@ -3,28 +3,18 @@ import Button from '../Button/Button';
 import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
+<<<<<<< HEAD
 
 function Users() {
+=======
+import Paginador from "../Paginador/Paginador";
+
+function Admin() {
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
     const [query, setQuery] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
     const [users, setUsers] = useState([]);
 
-
-    const anterior = () => {
-        let numero = pageNumber;
-        if (numero > 1) {
-            numero--;
-            setPageNumber(numero);
-        }
-    }
-
-    const siguiente = () => {
-        let numero = pageNumber;
-        if (numero < 10) {
-            numero++;
-            setPageNumber(numero);
-        }
-    }
     const find = (evt) => {
         const {value} = evt.target;
         setQuery(value);
@@ -32,7 +22,7 @@ function Users() {
 
     const fetchData = async () => {
         try {
-            let response = await fetch(`http://localhost:5052/User/(Admin/${pageNumber}/5?query=${query}`);
+            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleAdmin?query=${query}`);
             let json = await response.json();
 
             setUsers(json.users);
@@ -62,6 +52,7 @@ function Users() {
         }
     }
 
+<<<<<<< HEAD
     const banUser = async (userId) => {
         try {
             let response = await fetch(`http://localhost:5052/User/${userId}/ban`, {
@@ -78,15 +69,23 @@ function Users() {
         }
     }
 
+=======
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
     useEffect(() => {
         fetchData();
     }, [pageNumber, query]);
     
     return (
         <div>
-            <NavBar></NavBar>
+            <NavBar> </NavBar>
             <input type="text" value={query} onChange = {find}/>
+<<<<<<< HEAD
             <Table>
+=======
+
+            <Table>
+                
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
                 <tbody>
                     {
                         users.map((user) =>{
@@ -98,16 +97,31 @@ function Users() {
                                     <td>{user.banned ? "Baneado" : "Activo"}</td>
                                     <td>
                                         <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
+<<<<<<< HEAD
                                     </td>
                                     <td>
                                         <Button text="BANEAR" callback={() => banUser(user.id)}/>
                                     </td>
+=======
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
 
+                                    </td>
+                                    <td>
+                                        <a href="/ban">
+                                            <Button text="BAN"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/edit">
+                                            <Button text="EDITAR"/>
+                                        </a>
+                                    </td>
                                 </tr>
                             )
                         })
                     }
                 </tbody>
+<<<<<<< HEAD
 
             </Table>
             
@@ -116,8 +130,16 @@ function Users() {
             <Button text="Anterior" callback={anterior}/>
             <Label text={pageNumber}/>
             <Button text="Siguiente" callback={siguiente}/>
+=======
+            </Table>
+            <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
         </div>
     )
 }
 
+<<<<<<< HEAD
 export default Users;
+=======
+export default Admin;
+>>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70

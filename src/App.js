@@ -7,6 +7,7 @@ import Login from './components/Login/Login';
 import Baneo from './components/Ban/Ban';
 import Bienvinida from './components/Bienvenida/bienvenida';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Editar from './components/Editar/Editar';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route exact path="/users" element= {<PrivateRoute><Users/></PrivateRoute>}/>
           <Route exact path="/admin" element= {<PrivateRoute><Admin/></PrivateRoute>}/>
           <Route exact path="/ban" element= {<PrivateRoute><Baneo/></PrivateRoute>}/>
-
+          <Route exact path="/edit" element= {<PrivateRoute><Editar/></PrivateRoute>}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
     </BrowserRouter>
