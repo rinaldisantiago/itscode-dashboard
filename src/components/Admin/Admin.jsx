@@ -57,6 +57,7 @@ function Admin() {
                 title="Administradores" 
                 searchValue={query} 
                 searchFunc={find}
+                placeholder="Buscar Administrador"
             >
                 <Table>
                     <tbody>

@@ -12,6 +12,7 @@
 
 .input-search::placeholder {
     color: var(--muted);
+    text-align: center;
 }
 
 .input-search:focus {

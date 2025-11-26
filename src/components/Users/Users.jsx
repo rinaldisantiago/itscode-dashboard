@@ -54,6 +54,7 @@ function Users() {
                 title="Usuarios" 
                 searchValue={query} 
                 searchFunc={find}
+                placeholder="Buscar Usuario"
             >
                 <Table>
                     <tbody>
