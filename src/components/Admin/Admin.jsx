@@ -55,6 +55,7 @@ function Admin() {
     return (
         <div>
             <NavBar> </NavBar>
+            <h2>Administradores</h2>
             <div className="search">
                 <input  type="text" value={query} onChange = {find}/>
             </div>

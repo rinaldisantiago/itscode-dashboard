@@ -1,6 +1,5 @@
 import React, { useEffect, useState} from "react";
 import Button from '../Button/Button';
-import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
@@ -32,9 +31,9 @@ function Users() {
     const deleteUser = async (userId) => {
         try {
             const userLogged = JSON.parse(localStorage.getItem('user'));
-            const userLoggedId = userLogged?.id;
+            const idUserLogger = userLogged?.id;
             
-            let response = await fetch(`http://localhost:5052/User/${userId}/${userLoggedId}`, {
+            let response = await fetch(`http://localhost:5052/User?id=${userId}&idUserLogger=${idUserLogger}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -55,9 +54,11 @@ function Users() {
     return (
         <div className="conteiner-primary">
             <NavBar> </NavBar>
+            <h2>Usuarios</h2>
             <div className="search">
                 <input  type="text" value={query} onChange = {find}/>
             </div>
+
             <Table>
                 <tbody>
                     {
