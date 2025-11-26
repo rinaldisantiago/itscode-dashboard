@@ -62,22 +62,6 @@ function Users() {
         }
     }
 
-    const banUser = async (userId) => {
-        try {
-            let response = await fetch(`http://localhost:5052/User/${userId}/ban`, {
-                method: 'POST'
-            });
-            if (response.ok) {
-                alert("Usuario baneado exitosamente");
-                fetchData();
-            } else {
-                alert("Error al banear el usuario");
-            }
-        } catch (error) {
-            alert("Error al banear el usuario");
-        }
-    }
-
     useEffect(() => {
         fetchData();
     }, [pageNumber, query]);
