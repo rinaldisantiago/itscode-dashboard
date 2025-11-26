@@ -59,8 +59,8 @@ const Login = () => {
 
   return (
     <div class="contenedor-general">
-      <header class="topbar">
-        <div class="logo">&lt;/&gt; ITSCode</div>
+      <header className="topbar">
+        <div className="logo">&lt;/&gt; ITSCode</div>
       </header>
       <Container fluid className="login-container">
         <div className="login-wrapper">

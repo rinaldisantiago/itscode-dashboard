@@ -1,9 +1,8 @@
 import React, { useEffect, useState} from "react";
 import Button from '../Button/Button';
-import Label from '../Label/Label';
-import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
+import Layout from '../Layout/Layout';
 import './Admin.css';
 
 function Admin() {
@@ -54,44 +53,43 @@ function Admin() {
     
     return (
         <div>
-            <NavBar> </NavBar>
-            <h2>Administradores</h2>
-            <div className="search">
-                <input  type="text" value={query} onChange = {find}/>
-            </div>
+            <Layout 
+                title="Administradores" 
+                searchValue={query} 
+                searchFunc={find}
+            >
+                <Table>
+                    <tbody>
+                        {
+                            users.map((user) =>{
+                                return(
+                                    <tr key={user.id}>
+                                        <th scope="row">{user.id}</th>
+                                        <td>{user.fullName}</td>
+                                        <td>{user.userName}</td>
+                                        <td>{user.banned ? "Baneado" : "Activo"}</td>
+                                        <td>
+                                            <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
 
-            <Table>
-                
-                <tbody>
-                    {
-                        users.map((user) =>{
-                            return(
-                                <tr>
-                                    <th scope="row">{user.id}</th>
-                                    <td>{user.fullName}</td>
-                                    <td>{user.userName}</td>
-                                    <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                    <td>
-                                        <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-
-                                    </td>
-                                    <td>
-                                        <a href="/ban">
-                                            <Button text="BAN"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/edit">
-                                            <Button text="EDITAR"/>
-                                        </a>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </Table>
-            <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+                                        </td>
+                                        <td>
+                                            <a href="/ban">
+                                                <Button text="BAN"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/edit">
+                                                <Button text="EDITAR"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </Table>
+                <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+            </Layout>
         </div>
     )
 }
