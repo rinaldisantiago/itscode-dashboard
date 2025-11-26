@@ -15,9 +15,23 @@ function NavBar() {
   const user = userString ? JSON.parse(userString) : null;
   const isAuthenticated = !!user;
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
+  const handleLogout = async () => {
+    if (!user || !user.id) {
+      localStorage.removeItem('user');
+      navigate('/login');
+      return;
+    }
+    try { 
+      let response = await fetch(`http://localhost:5052/Session/${user.id}`, {
+        method: 'POST'
+      });
+
+    } catch (error) {
+      alert(`Error al intentar cerrar sesión: ${error}`);
+    } finally {
+      localStorage.removeItem('user');
+      navigate('/login');
+    }
   };
 
   return (
