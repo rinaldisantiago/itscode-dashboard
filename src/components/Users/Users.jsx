@@ -2,28 +2,14 @@ import React, { useEffect, useState} from "react";
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
+import Table from '../Table/Table';
+import Paginador from "../Paginador/Paginador";
 
 function Users() {
     const [query, setQuery] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
     const [users, setUsers] = useState([]);
 
-
-    const anterior = () => {
-        let numero = pageNumber;
-        if (numero > 1) {
-            numero--;
-            setPageNumber(numero);
-        }
-    }
-
-    const siguiente = () => {
-        let numero = pageNumber;
-        if (numero < 10) {
-            numero++;
-            setPageNumber(numero);
-        }
-    }
     const find = (evt) => {
         const {value} = evt.target;
         setQuery(value);
@@ -67,18 +53,11 @@ function Users() {
     
     return (
         <div>
-            <NavBar></NavBar>
+            <NavBar> </NavBar>
             <input type="text" value={query} onChange = {find}/>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre Completo</th>
-                        <th scope="col">Nombre de Usuario</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
+
+            <Table>
+                
                 <tbody>
                     {
                         users.map((user) =>{
@@ -103,12 +82,8 @@ function Users() {
                         })
                     }
                 </tbody>
-
-            </table>
-
-            <Button text="Anterior" callback={anterior}/>
-            <Label text={pageNumber}/>
-            <Button text="Siguiente" callback={siguiente}/>
+            </Table>
+           <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
         </div>
     )
 }

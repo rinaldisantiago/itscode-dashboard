@@ -2,25 +2,19 @@ import './Paginador.css';
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 
-import React, { useState } from 'react'
+import React from 'react'
 
-const Paginador = ({text}) => {
-    
-    const [pageNumber, setPageNumber] = useState(1);
+const Paginador = ({pageNumber, setPageNumber}) => {
 
     const anterior = () => {
-        let numero = pageNumber;
-        if (numero > 1) {
-            numero--;
-            setPageNumber(numero);
+        if (pageNumber > 1) {
+            setPageNumber(pageNumber - 1);
         }
     }
 
     const siguiente = () => {
-        let numero = pageNumber;
-        if (numero < 10) {
-            numero++;
-            setPageNumber(numero);
+        if (pageNumber < 10) {
+            setPageNumber(pageNumber + 1);
         }
     }
 
