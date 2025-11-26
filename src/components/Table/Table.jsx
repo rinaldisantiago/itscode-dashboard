@@ -1,69 +1,21 @@
 import React, { PureComponent } from 'react'
+import './Table.css'
 
 export class Table extends PureComponent {
   render() {
     return (
       <div>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                </tr>
-            </tbody>
-            </table>
-
-            <table class="table">
-            <thead class="thead-light">
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                </tr>
-            </tbody>
+        <table class= "table">
+                <thead className="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colSpan="2">Acciones</th>
+                    </tr>
+                </thead>
+                {this.props.children}
         </table>
       </div>
     )

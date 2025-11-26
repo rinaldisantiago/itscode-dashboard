@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import Button from '../Button/Button';
 import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
+import Table from '../Table/Table';
 
 function Users() {
     const [query, setQuery] = useState("");
@@ -85,16 +86,7 @@ function Users() {
         <div>
             <NavBar></NavBar>
             <input type="text" value={query} onChange = {find}/>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre Completo</th>
-                        <th scope="col">Nombre de Usuario</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
+            <Table>
                 <tbody>
                     {
                         users.map((user) =>{
@@ -106,12 +98,9 @@ function Users() {
                                     <td>{user.banned ? "Baneado" : "Activo"}</td>
                                     <td>
                                         <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-
                                     </td>
                                     <td>
-                                        <a href="/ban">
-                                            <Button text="BANEAR"/>
-                                        </a>
+                                        <Button text="BANEAR" callback={() => banUser(user.id)}/>
                                     </td>
 
                                 </tr>
@@ -120,7 +109,9 @@ function Users() {
                     }
                 </tbody>
 
-            </table>
+            </Table>
+            
+            
 
             <Button text="Anterior" callback={anterior}/>
             <Label text={pageNumber}/>
