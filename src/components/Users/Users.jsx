@@ -17,7 +17,7 @@ function Users() {
 
     const fetchData = async () => {
         try {
-            let response = await fetch(`http://localhost:5052/User/(User/${pageNumber}/5?query=${query}`);
+            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleUser?query=${query}`);
             let json = await response.json();
 
             setUsers(json.users);
@@ -73,10 +73,14 @@ function Users() {
                                     </td>
                                     <td>
                                         <a href="/ban">
-                                            <Button text="BANEAR"/>
+                                            <Button text="BAN"/>
                                         </a>
                                     </td>
-
+                                    <td>
+                                        <a href="/edit">
+                                            <Button text="EDITAR"/>
+                                        </a>
+                                    </td>
                                 </tr>
                             )
                         })
