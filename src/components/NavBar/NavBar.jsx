@@ -36,7 +36,7 @@ function NavBar() {
 
   return (
     <Navbar expand="lg" className="topbar">
-      <div class="logo">&lt;/&gt; ITSCode</div>
+      <div className="logo">&lt;/&gt; ITSCode</div>
 
       <Navbar.Toggle aria-controls="nav" />
       <Navbar.Collapse id="nav">
@@ -44,8 +44,8 @@ function NavBar() {
         <div className="nav-links me-auto">
           {isAuthenticated && (
             <>
-              <Link to="/users">User</Link>
-              <Link to="/admin">Admin</Link>
+              <Link className= "title" to="/users">User</Link>
+              <Link className= "title" to="/admin">Admin</Link>
             </>
           )}
         </div>

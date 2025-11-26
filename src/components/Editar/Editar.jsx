@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
+import "./Editar.css";
 
 function Editar() {
     const [userId, setUserId] = useState("");
@@ -33,34 +34,34 @@ function Editar() {
     };
 
     return (
-        <div>
+       <div>
             <NavBar />
 
-            <h2>Editar Rol del Usuario</h2>
+            <div className="edit-container">
+                <div className="edit-card">
+                    <h2 className="edit-title">Editar Rol del Usuario</h2>
 
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "300px",
-                margin: "20px"
-            }}>
-                <label>ID del Usuario:</label>
-                <input 
-                    type="number" 
-                    value={userId} 
-                    onChange={(e) => setUserId(e.target.value)} 
-                />
+                    <label>ID del Usuario:</label>
+                    <input
+                        className="edit-input"
+                        type="number"
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                    />
 
-                <label>ID del Rol:</label>
-                <input 
-                    type="number" 
-                    value={roleId} 
-                    onChange={(e) => setRoleId(e.target.value)} 
-                />
+                    <label>Rol:</label>
+                    <input
+                        className="edit-input"
+                        type="text"
+                        value={roleId}
+                        onChange={(e) => setRoleId(e.target.value)}
+                    />
 
-                <br />
-                <Button text="Actualizar Rol" callback={handleEditRole} />
-            </div>
+                    <button className="edit-btn" onClick={handleEditRole}>
+                        Actualizar Rol
+                    </button>
+                </div>
+           </div>
         </div>
     );
 }

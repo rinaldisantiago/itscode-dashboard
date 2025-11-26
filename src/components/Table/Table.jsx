@@ -5,7 +5,7 @@ export class Table extends PureComponent {
   render() {
     return (
       <div>
-        <table class="tabla">
+        <table className="tabla">
                 <thead class="thead-dark">
                     <tr className='tr'>
                         <th scope="col">Id</th>
