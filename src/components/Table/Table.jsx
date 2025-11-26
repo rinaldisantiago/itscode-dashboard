@@ -5,9 +5,9 @@ export class Table extends PureComponent {
   render() {
     return (
       <div>
-        <table class="table">
+        <table class="tabla">
                 <thead class="thead-dark">
-                    <tr>
+                    <tr className='tr'>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre Completo</th>
                         <th scope="col">Nombre de Usuario</th>

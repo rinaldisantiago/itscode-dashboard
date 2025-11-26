@@ -3,14 +3,10 @@ import Button from '../Button/Button';
 import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
-<<<<<<< HEAD
-
-function Users() {
-=======
 import Paginador from "../Paginador/Paginador";
+import './Admin.css';
 
 function Admin() {
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
     const [query, setQuery] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
     const [users, setUsers] = useState([]);
@@ -52,25 +48,6 @@ function Admin() {
         }
     }
 
-<<<<<<< HEAD
-    const banUser = async (userId) => {
-        try {
-            let response = await fetch(`http://localhost:5052/User/${userId}/ban`, {
-                method: 'POST'
-            });
-            if (response.ok) {
-                alert("Usuario baneado exitosamente");
-                fetchData();
-            } else {
-                alert("Error al banear el usuario");
-            }
-        } catch (error) {
-            alert("Error al banear el usuario");
-        }
-    }
-
-=======
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
     useEffect(() => {
         fetchData();
     }, [pageNumber, query]);
@@ -78,14 +55,12 @@ function Admin() {
     return (
         <div>
             <NavBar> </NavBar>
-            <input type="text" value={query} onChange = {find}/>
-<<<<<<< HEAD
-            <Table>
-=======
+            <div className="search">
+                <input  type="text" value={query} onChange = {find}/>
+            </div>
 
             <Table>
                 
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
                 <tbody>
                     {
                         users.map((user) =>{
@@ -97,13 +72,6 @@ function Admin() {
                                     <td>{user.banned ? "Baneado" : "Activo"}</td>
                                     <td>
                                         <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-<<<<<<< HEAD
-                                    </td>
-                                    <td>
-                                        <Button text="BANEAR" callback={() => banUser(user.id)}/>
-                                    </td>
-=======
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
 
                                     </td>
                                     <td>
@@ -121,25 +89,10 @@ function Admin() {
                         })
                     }
                 </tbody>
-<<<<<<< HEAD
-
-            </Table>
-            
-            
-
-            <Button text="Anterior" callback={anterior}/>
-            <Label text={pageNumber}/>
-            <Button text="Siguiente" callback={siguiente}/>
-=======
             </Table>
             <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70
         </div>
     )
 }
 
-<<<<<<< HEAD
-export default Users;
-=======
 export default Admin;
->>>>>>> f9ccc5738485810abe779b6104b95c94751e8a70

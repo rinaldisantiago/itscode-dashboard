@@ -6,7 +6,10 @@ import React from 'react'
 const Label = ({ text }) => {
   return (
     <label>
-      {text}
+      <div className='label'>
+        {text}
+      </div>
+      
     </label>
   )
 }

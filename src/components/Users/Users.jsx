@@ -4,6 +4,7 @@ import Label from '../Label/Label';
 import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
+import './Users.css';
 
 function Users() {
     const [query, setQuery] = useState("");
@@ -52,21 +53,23 @@ function Users() {
     }, [pageNumber, query]);
     
     return (
-        <div>
+        <div className="conteiner-primary">
             <NavBar> </NavBar>
-            <input type="text" value={query} onChange = {find}/>
+            <div className="search">
+                <input  type="text" value={query} onChange = {find}/>
+            </div>
             <Table>
                 <tbody>
                     {
                         users.map((user) =>{
                             return(
                                 <tr>
-                                    <th scope="row">{user.id}</th>
+                                    <td scope="row">{user.id}</td>
                                     <td>{user.fullName}</td>
                                     <td>{user.userName}</td>
                                     <td>{user.banned ? "Baneado" : "Activo"}</td>
                                     <td>
-                                        <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
+                                        <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
                                     </td>
                                     <td>
                                         <a href="/ban">
@@ -84,7 +87,9 @@ function Users() {
                     }
                 </tbody>
             </Table>
-           <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+            
+                <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+            
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
+import "./Ban.css";
 
 function Ban() {
     // BAN
@@ -69,37 +70,66 @@ function Ban() {
         <div>
             <NavBar />
 
-            <h2>Banear Usuario</h2>
-            <div style={{ display: "flex", flexDirection: "column", width: "300px", margin: "20px" }}>
-                <label>ID del Usuario:</label>
-                <input type="number" value={userId} onChange={(e) => setUserId(e.target.value)} />
+            <div className="ban-container">
 
-                <label>Motivo del Ban:</label>
-                <input type="text" value={reason} onChange={(e) => setReason(e.target.value)} />
+                {/* Tarjeta Banear */}
+                <div className="ban-card">
+                    <h2>Banear Usuario</h2>
+                    
+                    <label>ID del Usuario:</label>
+                    <input
+                        className="ban-input"
+                        type="number"
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                    />
 
-                <label>Fecha de Ban:</label>
-                <input type="date" value={banDate} onChange={(e) => setBanDate(e.target.value)} />
+                    <label>Motivo del Ban:</label>
+                    <input
+                        className="ban-input"
+                        type="text"
+                        value={reason}
+                        onChange={(e) => setReason(e.target.value)}
+                    />
 
-                <label>Fecha de Desban:</label>
-                <input type="date" value={unbanDate} onChange={(e) => setUnbanDate(e.target.value)} />
+                    <label>Fecha de Ban:</label>
+                    <input
+                        className="ban-input"
+                        type="date"
+                        value={banDate}
+                        onChange={(e) => setBanDate(e.target.value)}
+                    />
 
-                <br />
-                <Button text="Banear" callback={handleBan} />
-            </div>
+                    <label>Fecha de Desban:</label>
+                    <input
+                        className="ban-input"
+                        type="date"
+                        value={unbanDate}
+                        onChange={(e) => setUnbanDate(e.target.value)}
+                    />
 
-            <hr />
+                    <button className="ban-btn" onClick={handleBan}>
+                        Banear
+                    </button>
+                </div>
 
-            <h2>Desbanear Usuario</h2>
-            <div style={{ display: "flex", flexDirection: "column", width: "300px", margin: "20px" }}>
-                <label>ID del Usuario:</label>
-                <input
-                    type="number"
-                    value={unbanUserId}
-                    onChange={(e) => setUnbanUserId(e.target.value)}
-                />
+                {/* Tarjeta Desbanear */}
+                <div className="ban-card">
+                    <h2>Desbanear Usuario</h2>
 
-                <br />
-                <Button text="Desbanear" callback={handleUnban} />
+                    <label>ID del Usuario:</label>
+                    <input
+                        className="ban-input"
+                        type="number"
+                        value={unbanUserId}
+                        onChange={(e) => setUnbanUserId(e.target.value)}
+                    />
+
+                    <button className="ban-btn" onClick={handleUnban}>
+                        Desbanear
+                    </button>
+              </div>
+
             </div>
         </div>
     );

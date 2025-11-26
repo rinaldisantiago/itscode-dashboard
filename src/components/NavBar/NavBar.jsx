@@ -21,32 +21,35 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            {isAuthenticated && (
-              <>
-                <Nav.Link><Link to={"/users"}>User</Link></Nav.Link>
-                <Nav.Link><Link to={"/admin"}>Admin</Link></Nav.Link>
-              </>
-            )}
-          </Nav>
-          <Nav className="ms-auto">
-            {isAuthenticated ? (
-              <>
-                <span className="nav-text me-3">Bienvenido, {user?.userName}</span>
-                <Button variant="danger" size="sm" onClick={handleLogout}>
-                  Cerrar Sesión
-                </Button>
-              </>
-            ) : (
-              <Nav.Link><Link to={"/login"}></Link></Nav.Link>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+    <Navbar expand="lg" className="topbar">
+      <div class="logo">&lt;/&gt; ITSCode</div>
+
+      <Navbar.Toggle aria-controls="nav" />
+      <Navbar.Collapse id="nav">
+        
+        <div className="nav-links me-auto">
+          {isAuthenticated && (
+            <>
+              <Link to="/users">User</Link>
+              <Link to="/admin">Admin</Link>
+            </>
+          )}
+        </div>
+
+        <div className="right-section ms-auto">
+          {isAuthenticated ? (
+            <>
+              <span>Bienvenido, {user?.userName}</span>
+              <button className="logout-btn" onClick={handleLogout}>
+                Cerrar Sesión
+              </button>
+            </>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </div>
+
+      </Navbar.Collapse>
     </Navbar>
   );
 }

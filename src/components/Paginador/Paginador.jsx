@@ -1,6 +1,6 @@
 import './Paginador.css';
 import Button from '../Button/Button';
-import Label from '../Label/Label';
+import Label from '../Label/Label'
 
 import React from 'react'
 
@@ -19,11 +19,11 @@ const Paginador = ({pageNumber, setPageNumber}) => {
     }
 
     return (
-        <>
+        <div className="container-pager">
             <Button text="Anterior" callback={anterior}/>
             <Label text={pageNumber}/>
             <Button text="Siguiente" callback={siguiente}/>
-        </>
+        </div>
     )
 }
 
