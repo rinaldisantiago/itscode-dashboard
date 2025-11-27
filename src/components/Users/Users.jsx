@@ -1,8 +1,8 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button from '../Button/Button';
-import NavBar from '../NavBar/NavBar';
 import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
+import Layout from '../Layout/Layout'; 
 import './Users.css';
 
 function Users() {
@@ -11,7 +11,7 @@ function Users() {
     const [users, setUsers] = useState([]);
 
     const find = (evt) => {
-        const {value} = evt.target;
+        const { value } = evt.target;
         setQuery(value);
     }
 
@@ -19,12 +19,9 @@ function Users() {
         try {
             let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleUser?query=${query}`);
             let json = await response.json();
-
             setUsers(json.users);
         } catch (error) {
             alert("Error al traer los usuarios");
-        } finally {
-            
         }
     }
 
@@ -49,48 +46,48 @@ function Users() {
 
     useEffect(() => {
         fetchData();
-    }, [pageNumber, query]);
+    }, [pageNumber, query]); 
     
     return (
         <div className="conteiner-primary">
-            <NavBar> </NavBar>
-            <h2>Usuarios</h2>
-            <div className="search">
-                <input  type="text" value={query} onChange = {find}/>
-            </div>
-
-            <Table>
-                <tbody>
-                    {
-                        users.map((user) =>{
-                            return(
-                                <tr>
-                                    <td scope="row">{user.id}</td>
-                                    <td>{user.fullName}</td>
-                                    <td>{user.userName}</td>
-                                    <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                    <td>
-                                        <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-                                    </td>
-                                    <td>
-                                        <a href={`/ban?userId=${user.id}`}>
-                                            <Button text="BAN"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href={`/edit?userId=${user.id}`}>
-                                            <Button text="EDITAR"/>
-                                        </a>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </Table>
-            
+            <Layout 
+                title="Usuarios" 
+                searchValue={query} 
+                searchFunc={find}
+                placeholder="Buscar Usuario"
+            >
+                <Table>
+                    <tbody>
+                        {
+                            users.map((user) => {
+                                return(
+                                    <tr key={user.id}>
+                                        <td scope="row">{user.id}</td>
+                                        <td>{user.fullName}</td>
+                                        <td>{user.userName}</td>
+                                        <td>{user.banned ? "Baneado" : "Activo"}</td>
+                                        <td>
+                                            <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
+                                        </td>
+                                        <td>
+                                            <a href={`/ban?userId=${user.id}`}>
+                                                <Button text="BAN"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href={`/edit?userId=${user.id}`}>
+                                                <Button text="EDITAR"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </Table>
+                
                 <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
-            
+            </Layout>
         </div>
     )
 }

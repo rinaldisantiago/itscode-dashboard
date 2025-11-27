@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
+import "./Editar.css";
 import { useSearchParams } from "react-router-dom";
+
+
 
 function Editar() {
     const [searchParams] = useSearchParams();
     const [userId, setUserId] = useState("");
-    const [roleId, setRoleId] = useState("");
+    const [role, setRole] = useState("");
 
     useEffect(() => {
         const idFromUrl = searchParams.get("userId");
@@ -16,18 +19,18 @@ function Editar() {
     }, [searchParams]);
 
     const handleEditRole = async () => {
-        if (!userId || !roleId) {
+        if (!userId || !role) {
             alert("Debes completar ambos campos");
             return;
         }
 
         const body = {
             id: parseInt(userId),
-            idRole: parseInt(roleId)
+            role: role
         };
 
         try {
-            let response = await fetch(`http://localhost:5052/User/updateUserRole`, {
+            let response = await fetch("http://localhost:5052/User/updateUserRole", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -42,33 +45,33 @@ function Editar() {
     };
 
     return (
-        <div>
+       <div>
             <NavBar />
 
-            <h2>Editar Rol del Usuario</h2>
+            <div className="edit-container">
+                <div className="edit-card">
+                    <h2 className="edit-title">Editar Rol del Usuario</h2>
 
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "300px",
-                margin: "20px"
-            }}>
-                <label>ID del Usuario:</label>
-                <input 
-                    type="number" 
-                    value={userId} 
-                    onChange={(e) => setUserId(e.target.value)} 
-                />
+                    <label>ID del Usuario:</label>
+                    <input
+                        className="edit-input"
+                        type="number"
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                    />
 
-                <label>ID del Rol:</label>
-                <input 
-                    type="number" 
-                    value={roleId} 
-                    onChange={(e) => setRoleId(e.target.value)} 
-                />
+                    <label>Rol:</label>
+                    <input
+                        className="edit-input"
+                        type="text"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                    />
 
-                <br />
-                <Button text="Actualizar Rol" callback={handleEditRole} />
+                    <button className="edit-btn" onClick={handleEditRole}>
+                        Actualizar Rol
+                    </button>
+                </div>
             </div>
         </div>
     );

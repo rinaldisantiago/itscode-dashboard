@@ -15,14 +15,28 @@ function NavBar() {
   const user = userString ? JSON.parse(userString) : null;
   const isAuthenticated = !!user;
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
+  const handleLogout = async () => {
+    if (!user || !user.id) {
+      localStorage.removeItem('user');
+      navigate('/login');
+      return;
+    }
+    try { 
+      let response = await fetch(`http://localhost:5052/Session/${user.id}`, {
+        method: 'POST'
+      });
+
+    } catch (error) {
+      alert(`Error al intentar cerrar sesión: ${error}`);
+    } finally {
+      localStorage.removeItem('user');
+      navigate('/login');
+    }
   };
 
   return (
     <Navbar expand="lg" className="topbar">
-      <div class="logo">&lt;/&gt; ITSCode</div>
+      <div className="logo">&lt;/&gt; ITSCode</div>
 
       <Navbar.Toggle aria-controls="nav" />
       <Navbar.Collapse id="nav">
@@ -30,8 +44,8 @@ function NavBar() {
         <div className="nav-links me-auto">
           {isAuthenticated && (
             <>
-              <Link to="/users">User</Link>
-              <Link to="/admin">Admin</Link>
+              <Link className= "title" to="/users">User</Link>
+              <Link className= "title" to="/admin">Admin</Link>
             </>
           )}
         </div>
