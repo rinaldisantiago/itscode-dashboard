@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
+import { useSearchParams } from "react-router-dom";
 
 function Editar() {
+    const [searchParams] = useSearchParams();
     const [userId, setUserId] = useState("");
     const [roleId, setRoleId] = useState("");
+
+    useEffect(() => {
+        const idFromUrl = searchParams.get("userId");
+        if (idFromUrl) {
+            setUserId(idFromUrl);
+        }
+    }, [searchParams]);
 
     const handleEditRole = async () => {
         if (!userId || !roleId) {

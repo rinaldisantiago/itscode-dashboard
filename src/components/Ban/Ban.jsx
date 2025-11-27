@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
+import { useSearchParams } from "react-router-dom";
 import "./Ban.css";
 
 function Ban() {
+    const [searchParams] = useSearchParams();
+    
     // BAN
     const [userId, setUserId] = useState("");
     const [reason, setReason] = useState("");
@@ -12,6 +15,13 @@ function Ban() {
 
     // UNBAN
     const [unbanUserId, setUnbanUserId] = useState("");
+
+    useEffect(() => {
+        const idFromUrl = searchParams.get("userId");
+        if (idFromUrl) {
+            setUserId(idFromUrl);
+        }
+    }, [searchParams]);
 
     const handleBan = async () => {
         if (!userId || !reason || !banDate || !unbanDate) {
