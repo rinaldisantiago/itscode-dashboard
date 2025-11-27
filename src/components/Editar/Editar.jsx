@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
 import "./Editar.css";
 import { showSuccessAlert, showErrorAlert } from "../Alert/Alert";
+import { useSearchParams } from "react-router-dom";
+
+
 
 function Editar() {
+    const [searchParams] = useSearchParams();
     const [userId, setUserId] = useState("");
     const [role, setRole] = useState("");
+
+    useEffect(() => {
+        const idFromUrl = searchParams.get("userId");
+        if (idFromUrl) {
+            setUserId(idFromUrl);
+        }
+    }, [searchParams]);
+
+    const body = {
+        id: parseInt(userId),
+        role: role
+    };
 
     const handleEditRole = async () => {
     if (!userId || !role) {
         showErrorAlert("Debes completar ambos campos para actualizar el rol.", 'warning');
         return;
     }
-
-    const body = {
-        id: parseInt(userId),
-        role: role
-    };
 
     try {
         let response = await fetch(`http://localhost:5052/User/updateUserRole`, {
@@ -38,7 +49,7 @@ function Editar() {
 };
 
     return (
-       <div>
+        <div>
             <NavBar />
 
             <div className="edit-container">
@@ -65,7 +76,7 @@ function Editar() {
                         Actualizar Rol
                     </button>
                 </div>
-           </div>
+            </div>
         </div>
     );
 }

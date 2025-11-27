@@ -66,6 +66,7 @@ function Admin() {
                 title="Administradores" 
                 searchValue={query} 
                 searchFunc={find}
+                placeholder="Buscar Administrador"
             >
                 <Table>
                     <tbody>
@@ -89,12 +90,12 @@ function Admin() {
                                             />
                                         </td>
                                         <td>
-                                            <a href="/ban">
+                                            <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/edit">
+                                            <a href={`/edit?userId=${user.id}`}>
                                                 <Button text="EDITAR"/>
                                             </a>
                                         </td>
