@@ -82,8 +82,6 @@ function Users() {
                                                         "Esta acción es irreversible.")
                                                 }
                                             />
-                                        </td>
-                                        <td>
                                             <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>
@@ -91,7 +89,6 @@ function Users() {
                                                 <Button text="EDITAR"/>
                                             </a>
                                         </td>
-                                       
                                     </tr>
                                 )
                             })
