@@ -1,5 +1,7 @@
 /* ===== TABLA ITSCode ===== */
-
+/* * {
+outline: 1px dashed red;
+} */
 .tabla-container {
   background: var(--card);
   border-radius: 14px;
@@ -54,6 +56,12 @@
   color: var(--text);
   background-color: #094e64;
 }
+
+/* Columna de ACCIONES con ancho fijo */
+.tabla th.acciones-col{
+  text-align: center; /* Centra el contenido */
+}
+
 
 /* ESTADO (activo/inactivo) */
 .estado-pill {
@@ -114,4 +122,82 @@
 .tr{
     background-color: #094e64;
     width: 100% !important;
+}
+
+/* ============================
+   📱 RESPONSIVE ITSCode TABLE
+============================ */
+
+/* ========== TABLET ==========
+   (Pantallas entre 768px y 1024px)
+================================ */
+@media (max-width: 1024px) {
+  
+  /* Reducimos padding general */
+  .tabla-container {
+    padding: 14px;
+  }
+
+  /* Filas e inputs más compactos */
+  .tabla td,
+  .tabla thead th {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  /* Botones más chicos */
+  .btn-action {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .tabla .acciones-btn {
+    gap: 8px;
+  }
+}
+
+/* ========== CELULAR ==========
+   (celulares hasta 768px)
+================================ */
+@media (max-width: 768px) {
+
+  /* Contenedor scroll horizontal */
+  .tabla-container {
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  /* La tabla ahora es más angosta y se hace scroll */
+  .tabla {
+    min-width: 600px; 
+    font-size: 13px;
+  }
+
+  /* Reducimos padding aún más */
+  .tabla td,
+  .tabla thead th {
+    padding: 10px;
+  }
+
+
+  /* Tamaño de fuente para ahorrar espacio */
+  .tabla thead th {
+    font-size: 13px;
+  }
+
+  /* Botones todavía más pequeños */
+  .btn-action {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .tabla .acciones-btn {
+    gap: 6px;
+  }
+
+  /* Pills de estado más compactas */
+  .estado-pill {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
 }

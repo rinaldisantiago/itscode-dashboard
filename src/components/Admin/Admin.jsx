@@ -4,6 +4,7 @@ import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
 import Layout from '../Layout/Layout';
 import './Admin.css';
+import { showDeleteConfirmAlert, showSuccessAlert, showErrorAlert } from '../Alert/Alert';
 
 function Admin() {
     const [query, setQuery] = useState("");
@@ -18,14 +19,20 @@ function Admin() {
     const fetchData = async () => {
         try {
             let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleAdmin?query=${query}`);
-            let json = await response.json();
+            if (!response.ok) {
 
+                const errorData = await response.json().catch(() => ({ message: 'Error desconocido' }));
+                showErrorAlert(`Fallo al cargar usuarios: ${response.status} - ${errorData.message || 'Error del servidor'}`, 'warning');
+                return; 
+            }
+
+            let json = await response.json();
             setUsers(json.users);
+
         } catch (error) {
-            alert("Error al traer los usuarios");
-        } finally {
-            
-        }
+            console.error("Error al obtener datos de usuarios:", error);
+            showErrorAlert("Error al traer los usuarios. Verifica tu conexión o el estado del servicio.", 'error');
+        } 
     }
 
     const deleteUser = async (userId) => {
@@ -36,14 +43,16 @@ function Admin() {
             let response = await fetch(`http://localhost:5052/User/${userId}/${userLoggedId}`, {
                 method: 'DELETE'
             });
+
             if (response.ok) {
-                alert("Usuario eliminado exitosamente");
+                showSuccessAlert("Usuario eliminado exitosamente"); 
                 fetchData();
             } else {
-                alert("Error al eliminar el usuario");
+                showErrorAlert("Error al eliminar el usuario. El servidor rechazó la solicitud.");
             }
         } catch (error) {
-            alert("Error al eliminar el usuario");
+            console.error("Error en la petición de eliminación:", error);
+            showErrorAlert("Error de conexión. No se pudo completar la solicitud de eliminación.");
         }
     }
 
@@ -52,9 +61,9 @@ function Admin() {
     }, [pageNumber, query]);
     
     return (
-        <div>
+       <div className="conteiner-primary">
             <Layout 
-                title="Administradores" 
+                title="Administadores" 
                 searchValue={query} 
                 searchFunc={find}
                 placeholder="Buscar Administrador"
@@ -62,33 +71,40 @@ function Admin() {
                 <Table>
                     <tbody>
                         {
-                            users.map((user) =>{
+                            users.map((user) => {
                                 return(
                                     <tr key={user.id}>
-                                        <th scope="row">{user.id}</th>
+                                        <td scope="row">{user.id}</td>
                                         <td>{user.fullName}</td>
                                         <td>{user.userName}</td>
                                         <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                        <td>
-                                            <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-
+                                        <td className="acciones-btn">
+                                            <Button 
+                                                className="delete" 
+                                                text="ELIMINAR" 
+                                                callback={() => 
+                                                    showDeleteConfirmAlert(() => deleteUser(user.id), 
+                                                        '¿Borrar a ' + user.fullName + '?', 
+                                                        "Esta acción es irreversible.")
+                                                }
+                                            />
                                         </td>
                                         <td>
                                             <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>
-                                        </td>
-                                        <td>
                                             <a href={`/edit?userId=${user.id}`}>
                                                 <Button text="EDITAR"/>
                                             </a>
                                         </td>
+                                       
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
                 </Table>
+                
                 <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
             </Layout>
         </div>
