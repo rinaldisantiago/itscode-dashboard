@@ -52,9 +52,9 @@ function Admin() {
     }, [pageNumber, query]);
     
     return (
-        <div>
+       <div className="conteiner-primary">
             <Layout 
-                title="Administradores" 
+                title="Administadores" 
                 searchValue={query} 
                 searchFunc={find}
                 placeholder="Buscar Administrador"
@@ -62,33 +62,30 @@ function Admin() {
                 <Table>
                     <tbody>
                         {
-                            users.map((user) =>{
+                            users.map((user) => {
                                 return(
                                     <tr key={user.id}>
-                                        <th scope="row">{user.id}</th>
+                                        <td scope="row">{user.id}</td>
                                         <td>{user.fullName}</td>
                                         <td>{user.userName}</td>
                                         <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                        <td>
-                                            <Button text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-
-                                        </td>
-                                        <td>
+                                        <td className="acciones-btn">
+                                            <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
                                             <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>
-                                        </td>
-                                        <td>
                                             <a href={`/edit?userId=${user.id}`}>
                                                 <Button text="EDITAR"/>
                                             </a>
                                         </td>
+                                       
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
                 </Table>
+                
                 <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
             </Layout>
         </div>

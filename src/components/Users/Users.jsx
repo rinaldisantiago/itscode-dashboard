@@ -66,19 +66,16 @@ function Users() {
                                         <td>{user.fullName}</td>
                                         <td>{user.userName}</td>
                                         <td>{user.banned ? "Baneado" : "Activo"}</td>
-                                        <td>
+                                        <td className="acciones-btn">
                                             <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
-                                        </td>
-                                        <td>
                                             <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>
-                                        </td>
-                                        <td>
                                             <a href={`/edit?userId=${user.id}`}>
                                                 <Button text="EDITAR"/>
                                             </a>
                                         </td>
+                                       
                                     </tr>
                                 )
                             })
