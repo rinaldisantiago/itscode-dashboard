@@ -4,6 +4,7 @@ import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
 import Layout from '../Layout/Layout'; 
 import './Users.css';
+import { showDeleteConfirmAlert, showSuccessAlert, showErrorAlert } from '../Alert/Alert';
 
 function Users() {
     const [query, setQuery] = useState("");
@@ -16,33 +17,38 @@ function Users() {
     }
 
     const fetchData = async () => {
-        try {
-            let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleUser?query=${query}`);
-            let json = await response.json();
-            setUsers(json.users);
-        } catch (error) {
-            alert("Error al traer los usuarios");
-        }
+    try {
+        let response = await fetch(`http://localhost:5052/User/${pageNumber}/5/roleUser?query=${query}`);
+        
+        let json = await response.json();
+        setUsers(json.users);
+        
+    } catch (error) {
+        console.error("Error al obtener datos de usuarios:", error);
+        showErrorAlert("Error al traer los usuarios. Verifica tu conexión o el estado del servidor.");
     }
+}
 
     const deleteUser = async (userId) => {
-        try {
-            const userLogged = JSON.parse(localStorage.getItem('user'));
-            const idUserLogger = userLogged?.id;
-            
-            let response = await fetch(`http://localhost:5052/User?id=${userId}&idUserLogger=${idUserLogger}`, {
-                method: 'DELETE'
-            });
-            if (response.ok) {
-                alert("Usuario eliminado exitosamente");
-                fetchData();
-            } else {
-                alert("Error al eliminar el usuario");
-            }
-        } catch (error) {
-            alert("Error al eliminar el usuario");
+    try {
+        const userLogged = JSON.parse(localStorage.getItem('user'));
+        const idUserLogger = userLogged?.id;
+        
+        let response = await fetch(`http://localhost:5052/User?id=${userId}&idUserLogger=${idUserLogger}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            fetchData();
+        
+        } else {
+            showErrorAlert("Error al eliminar el usuario. El servidor rechazó la solicitud.");
         }
+    } catch (error) {
+        console.error("Error en la petición de eliminación:", error);
+        showErrorAlert("Error de conexión. No se pudo conectar con el servicio de eliminación.");
     }
+}
 
     useEffect(() => {
         fetchData();
@@ -67,7 +73,17 @@ function Users() {
                                         <td>{user.userName}</td>
                                         <td>{user.banned ? "Baneado" : "Activo"}</td>
                                         <td className="acciones-btn">
-                                            <Button className="delete" text="ELIMINAR" callback={() => deleteUser(user.id)}/>
+                                            <Button 
+                                                className="delete" 
+                                                text="ELIMINAR" 
+                                                callback={() => 
+                                                    showDeleteConfirmAlert(() => deleteUser(user.id), 
+                                                        '¿Borrar a ' + user.fullName + '?', 
+                                                        "Esta acción es irreversible.")
+                                                }
+                                            />
+                                        </td>
+                                        <td>
                                             <a href={`/ban?userId=${user.id}`}>
                                                 <Button text="BAN"/>
                                             </a>

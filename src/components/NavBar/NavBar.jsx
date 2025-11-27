@@ -6,11 +6,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import { showLogoutConfirmAlert } from '../Alert/Alert';
 
 function NavBar() {
   const navigate = useNavigate();
 
-  // Leemos directamente de localStorage para saber si el usuario está autenticado.
   const userString = localStorage.getItem('user');
   const user = userString ? JSON.parse(userString) : null;
   const isAuthenticated = !!user;
@@ -52,15 +52,18 @@ function NavBar() {
 
         <div className="right-section ms-auto">
           {isAuthenticated ? (
-            <>
-              <span>Bienvenido, {user?.userName}</span>
-              <button className="logout-btn" onClick={handleLogout}>
-                Cerrar Sesión
-              </button>
-            </>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
+              <>
+                <span>Bienvenido, {user?.userName}</span>
+                <button 
+                    className="logout-btn" 
+                    onClick={() => showLogoutConfirmAlert(handleLogout)}
+                >
+                  Cerrar Sesión
+                </button>
+              </>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
         </div>
 
       </Navbar.Collapse>
