@@ -7,7 +7,6 @@
   flex-wrap: wrap;
 }
 
-/* CARD */
 .ban-card {
   background: var(--card);
   border-radius: 14px;
@@ -17,7 +16,6 @@
   width: 350px;
 }
 
-/* TITULO */
 .ban-card h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -26,7 +24,6 @@
   font-weight: 700;
 }
 
-/* LABEL */
 .ban-card label {
   color: var(--text);
   font-weight: 600;
@@ -36,7 +33,6 @@
   display: block;
 }
 
-/* INPUT */
 .ban-card .ban-input {
   width: 100%;
   padding: 10px 12px;
@@ -53,13 +49,13 @@
 }
 
 .ban-card .ban-input:focus {
+  outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.35);
   background: #0c222b;
   color: var(--text);
 }
 
-/* BOTÓN */
 .ban-card .ban-btn {
   width: 100%;
   padding: 12px;

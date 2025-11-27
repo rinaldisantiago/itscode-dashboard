@@ -1,11 +1,9 @@
-/* Contenedor principal centrado */
 .edit-container {
   display: flex;
   justify-content: center;
   padding: 40px 20px;
 }
 
-/* Tarjeta */
 .edit-card {
   background: var(--card);
   border-radius: 14px;
@@ -15,7 +13,6 @@
   width: 350px;
 }
 
-/* Título */
 .edit-title {
   text-align: center;
   color: var(--text);
@@ -24,7 +21,6 @@
   font-weight: 700;
 }
 
-/* Labels */
 .edit-card label {
   color: var(--text);
   font-weight: 600;
@@ -34,7 +30,6 @@
   display: block;
 }
 
-/* Inputs */
 .edit-card .edit-input {
   width: 100%;
   padding: 10px 12px;
@@ -47,12 +42,12 @@
 }
 
 .edit-card .edit-input:focus {
+  outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.35);
   background: #0c222b;
 }
 
-/* Botón */
 .edit-card .edit-btn {
   width: 100%;
   padding: 12px;
