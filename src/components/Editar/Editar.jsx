@@ -2,36 +2,40 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
 import "./Editar.css";
+import { showSuccessAlert, showErrorAlert } from "../Alert/Alert";
 
 function Editar() {
     const [userId, setUserId] = useState("");
-    const [roleId, setRoleId] = useState("");
+    const [role, setRole] = useState("");
 
     const handleEditRole = async () => {
-        if (!userId || !roleId) {
-            alert("Debes completar ambos campos");
-            return;
-        }
+    if (!userId || !role) {
+        showErrorAlert("Debes completar ambos campos para actualizar el rol.", 'warning');
+        return;
+    }
 
-        const body = {
-            id: parseInt(userId),
-            idRole: parseInt(roleId)
-        };
-
-        try {
-            let response = await fetch(`http://localhost:5052/User/updateUserRole`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
-
-            response.ok
-                ? alert("Rol actualizado correctamente")
-                : alert("Error al actualizar el rol");
-        } catch (error) {
-            alert("Error en la petición");
-        }
+    const body = {
+        id: parseInt(userId),
+        role: role
     };
+
+    try {
+        let response = await fetch(`http://localhost:5052/User/updateUserRole`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+
+        if (response.ok) {
+            showSuccessAlert("El rol del usuario fue actualizado correctamente.");
+        } else {
+            showErrorAlert("Error al actualizar el rol. Verifica los datos e intenta de nuevo.");
+        }
+
+    } catch (error) {
+        showErrorAlert("Error de conexión. No se pudo completar la solicitud.");
+    }
+};
 
     return (
        <div>
@@ -53,8 +57,8 @@ function Editar() {
                     <input
                         className="edit-input"
                         type="text"
-                        value={roleId}
-                        onChange={(e) => setRoleId(e.target.value)}
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     />
 
                     <button className="edit-btn" onClick={handleEditRole}>

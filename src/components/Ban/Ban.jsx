@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Button from "../Button/Button";
 import "./Ban.css";
+import { showSuccessAlert, showErrorAlert } from "../Alert/Alert";
 
 function Ban() {
     // BAN
@@ -14,57 +15,57 @@ function Ban() {
     const [unbanUserId, setUnbanUserId] = useState("");
 
     const handleBan = async () => {
-        if (!userId || !reason || !banDate || !unbanDate) {
-            alert("Todos los campos para banear son obligatorios");
-            return;
-        }
+    if (!userId || !reason || !banDate || !unbanDate) {
+        showErrorAlert("Todos los campos para banear son obligatorios", 'warning');
+        return;
+    }
 
-        const body = {
-            userId: parseInt(userId),
-            reason,
-            banDate,
-            unbanDate
-        };
-
-        try {
-            let response = await fetch(`http://localhost:5052/Ban`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
-
-            response.ok
-                ? alert("Usuario baneado correctamente")
-                : alert("Error al banear el usuario");
-        } catch (error) {
-            alert("Error en la petición");
-        }
+    const body = {
+        userId: parseInt(userId),
+        reason,
+        banDate,
+        unbanDate
     };
 
-    const handleUnban = async () => {
-        if (!unbanUserId) {
-            alert("Debes ingresar el ID del usuario a desbanear");
-            return;
-        }
+    try {
+        let response = await fetch(`http://localhost:5052/Ban`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
 
-        const body = {
-            userId: parseInt(unbanUserId)
-        };
+        response.ok
+            ? showSuccessAlert("Usuario baneado correctamente")
+            : showErrorAlert("Error al banear el usuario");
+    } catch (error) {
+        showErrorAlert("Error en la petición: No se pudo conectar con el servidor.");
+    }
+};
 
-        try {
-            let response = await fetch(`http://localhost:5052/Ban`, {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
+const handleUnban = async () => {
+    if (!unbanUserId) {
+        showErrorAlert("Debes ingresar el ID del usuario a desbanear", 'warning');
+        return;
+    }
 
-            response.ok
-                ? alert("Usuario desbaneado correctamente")
-                : alert("Error al desbanear el usuario");
-        } catch (error) {
-            alert("Error en la petición");
-        }
+    const body = {
+        userId: parseInt(unbanUserId)
     };
+
+    try {
+        let response = await fetch(`http://localhost:5052/Ban`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+
+        response.ok
+            ? showSuccessAlert("Usuario desbaneado correctamente")
+            : showErrorAlert("Error al desbanear el usuario");
+    } catch (error) {
+        showErrorAlert("Error en la petición: No se pudo conectar con el servidor.");
+    }
+};
 
     return (
         <div>
@@ -72,7 +73,6 @@ function Ban() {
 
             <div className="ban-container">
 
-                {/* Tarjeta Banear */}
                 <div className="ban-card">
                     <h2>Banear Usuario</h2>
                     
@@ -113,7 +113,6 @@ function Ban() {
                     </button>
                 </div>
 
-                {/* Tarjeta Desbanear */}
                 <div className="ban-card">
                     <h2>Desbanear Usuario</h2>
 
@@ -128,7 +127,7 @@ function Ban() {
                     <button className="ban-btn" onClick={handleUnban}>
                         Desbanear
                     </button>
-              </div>
+                </div>
 
             </div>
         </div>
