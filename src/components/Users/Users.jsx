@@ -10,6 +10,7 @@ function Users() {
     const [query, setQuery] = useState("");
     const [pageNumber, setPageNumber] = useState(1);
     const [users, setUsers] = useState([]);
+    const [totalPages, setTotalPages] = useState(1);
 
     const find = (evt) => {
         const { value } = evt.target;
@@ -22,6 +23,7 @@ function Users() {
         
         let json = await response.json();
         setUsers(json.users);
+        setTotalPages(json.totalPages);
         
     } catch (error) {
         console.error("Error al obtener datos de usuarios:", error);
@@ -96,7 +98,7 @@ function Users() {
                     </tbody>
                 </Table>
                 
-                <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber}></Paginador>
+                <Paginador pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={totalPages}></Paginador>
             </Layout>
         </div>
     )

@@ -4,7 +4,7 @@ import Label from '../Label/Label'
 
 import React from 'react'
 
-const Paginador = ({pageNumber, setPageNumber}) => {
+const Paginador = ({pageNumber, setPageNumber, totalPages}) => {
 
     const anterior = () => {
         if (pageNumber > 1) {
@@ -13,7 +13,7 @@ const Paginador = ({pageNumber, setPageNumber}) => {
     }
 
     const siguiente = () => {
-        if (pageNumber < 10) {
+        if (pageNumber < totalPages) {
             setPageNumber(pageNumber + 1);
         }
     }

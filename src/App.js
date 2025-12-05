@@ -5,7 +5,7 @@ import Users from './components/Users/Users';
 import Admin from './components/Admin/Admin';
 import Login from './components/Login/Login';
 import Baneo from './components/Ban/Ban';
-import Bienvinida from './components/Bienvenida/bienvenida';
+import Bienvinida from './components/Bienvenida/Bienvenida';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Editar from './components/Editar/Editar';
 

@@ -1,4 +1,3 @@
-/* ===== TABLA ITSCode ===== */
 /* * {
 outline: 1px dashed red;
 } */
@@ -12,7 +11,6 @@ outline: 1px dashed red;
   overflow-x: auto;
 }
 
-/* TABLA BASE */
 .tabla {
   width: 100%;
   border-collapse: collapse;
@@ -22,7 +20,6 @@ outline: 1px dashed red;
   background-color: #094e64;
 }
 
-/* ENCABEZADO */
 .thead-dark {
   background: #0f2e38;
 }
@@ -36,7 +33,6 @@ outline: 1px dashed red;
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.45);
 }
 
-/* FILAS */
 .tabla tbody tr {
   transition: 0.15s ease;
 }
@@ -49,7 +45,6 @@ outline: 1px dashed red;
   background: rgba(0, 255, 255, 0.05);
 }
 
-/* CELDAS */
 .tabla td {
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -57,13 +52,11 @@ outline: 1px dashed red;
   background-color: #094e64;
 }
 
-/* Columna de ACCIONES con ancho fijo */
+
 .tabla th.acciones-col{
-  text-align: center; /* Centra el contenido */
+  text-align: center;
 }
 
-
-/* ESTADO (activo/inactivo) */
 .estado-pill {
   padding: 6px 12px;
   border-radius: 20px;
@@ -85,13 +78,11 @@ outline: 1px dashed red;
   border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
-/* ACCIONES */
 .tabla .acciones-btn {
   display: flex;
   gap: 12px;
 }
 
-/* BOTONES */
 .btn-action {
   padding: 8px 14px;
   border-radius: 8px;
@@ -109,7 +100,6 @@ outline: 1px dashed red;
   transform: translateY(-2px);
 }
 
-/* BOTÓN ROJO PARA ELIMINAR */
 .btn-delete {
   border-color: #ff4c4c;
   color: #ff4c4c;
@@ -124,28 +114,18 @@ outline: 1px dashed red;
     width: 100% !important;
 }
 
-/* ============================
-   📱 RESPONSIVE ITSCode TABLE
-============================ */
-
-/* ========== TABLET ==========
-   (Pantallas entre 768px y 1024px)
-================================ */
 @media (max-width: 1024px) {
   
-  /* Reducimos padding general */
   .tabla-container {
     padding: 14px;
   }
 
-  /* Filas e inputs más compactos */
   .tabla td,
   .tabla thead th {
     padding: 12px 14px;
     font-size: 14px;
   }
 
-  /* Botones más chicos */
   .btn-action {
     padding: 6px 10px;
     font-size: 13px;
@@ -156,36 +136,27 @@ outline: 1px dashed red;
   }
 }
 
-/* ========== CELULAR ==========
-   (celulares hasta 768px)
-================================ */
 @media (max-width: 768px) {
 
-  /* Contenedor scroll horizontal */
   .tabla-container {
     padding: 10px;
     overflow-x: auto;
   }
 
-  /* La tabla ahora es más angosta y se hace scroll */
   .tabla {
     min-width: 600px; 
     font-size: 13px;
   }
 
-  /* Reducimos padding aún más */
   .tabla td,
   .tabla thead th {
     padding: 10px;
   }
 
-
-  /* Tamaño de fuente para ahorrar espacio */
   .tabla thead th {
     font-size: 13px;
   }
 
-  /* Botones todavía más pequeños */
   .btn-action {
     padding: 5px 8px;
     font-size: 12px;
@@ -195,7 +166,6 @@ outline: 1px dashed red;
     gap: 6px;
   }
 
-  /* Pills de estado más compactas */
   .estado-pill {
     padding: 4px 8px;
     font-size: 11px;

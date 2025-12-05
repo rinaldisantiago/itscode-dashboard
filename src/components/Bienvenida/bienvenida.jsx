@@ -1,5 +1,5 @@
 import React from "react";
-import './bienvenida.css';
+import './Bienvenida.css';
 
 function Bienvenida() {
     return (
