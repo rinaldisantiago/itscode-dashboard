@@ -32,7 +32,6 @@ function Admin() {
             setTotalPages(json.totalPages);
 
         } catch (error) {
-            console.error("Error al obtener datos de usuarios:", error);
             showErrorAlert("Error al traer los usuarios. Verifica tu conexión o el estado del servicio.", 'error');
         } 
     }
@@ -53,7 +52,6 @@ function Admin() {
                 showErrorAlert("Error al eliminar el usuario. El servidor rechazó la solicitud.");
             }
         } catch (error) {
-            console.error("Error en la petición de eliminación:", error);
             showErrorAlert("Error de conexión. No se pudo completar la solicitud de eliminación.");
         }
     }
@@ -63,7 +61,7 @@ function Admin() {
     }, [pageNumber, query]);
     
     return (
-       <div className="conteiner-primary">
+        <div className="conteiner-primary">
             <Layout 
                 title="Administadores" 
                 searchValue={query} 

@@ -26,7 +26,6 @@ function Users() {
         setTotalPages(json.totalPages);
         
     } catch (error) {
-        console.error("Error al obtener datos de usuarios:", error);
         showErrorAlert("Error al traer los usuarios. Verifica tu conexión o el estado del servidor.");
     }
 }
@@ -47,7 +46,6 @@ function Users() {
             showErrorAlert("Error al eliminar el usuario. El servidor rechazó la solicitud.");
         }
     } catch (error) {
-        console.error("Error en la petición de eliminación:", error);
         showErrorAlert("Error de conexión. No se pudo conectar con el servicio de eliminación.");
     }
 }
