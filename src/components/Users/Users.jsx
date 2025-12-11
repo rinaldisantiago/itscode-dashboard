@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from '../Button/Button';
 import Table from '../Table/Table';
 import Paginador from "../Paginador/Paginador";
 import Layout from '../Layout/Layout'; 
 import './Users.css';
-import { showDeleteConfirmAlert, showSuccessAlert, showErrorAlert } from '../Alert/Alert';
+import { showDeleteConfirmAlert, showErrorAlert } from '../Alert/Alert';
 
 function Users() {
     const [query, setQuery] = useState("");
