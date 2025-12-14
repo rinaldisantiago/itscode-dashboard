@@ -15,6 +15,7 @@ function Users() {
     const find = (evt) => {
         const { value } = evt.target;
         setQuery(value);
+        setPageNumber(1);
     }
 
     const fetchData = async () => {
