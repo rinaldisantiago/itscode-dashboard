@@ -47,7 +47,6 @@ function Users() {
             showErrorAlert("Error al eliminar el usuario. El servidor rechazó la solicitud.");
         }
     } catch (error) {
-        console.log("hola")
         showErrorAlert("Error de conexión. No se pudo conectar con el servicio de eliminación.");
     }
 }
